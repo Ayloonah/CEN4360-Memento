@@ -1,6 +1,8 @@
 package com.luanya.memento;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;

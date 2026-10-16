@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">Memento</string>
+
+    <string name="icon_back">Navigate back</string>
+    <string name="icon_menu">Open options</string>
+    <string name="icon_settings">Navigate to settings</string>
+    <string name="icon_scrapbook">Navigate to Scrapbook</string>
+
+    <string name="toolbar_memento">Memento</string>
+    <string name="toolbar_scrapbook">Scrapbook</string>
+    <string name="toolbar_settings">Settings</string>
+    <string name="toolbar_vignette_candidates">Vignette Candidates</string>
+    <string name="toolbar_create_vignette">Create a Vignette</string>
+    <string name="toolbar_create_album">Create an Album</string>
+
+    <string name="header_your_vignettes">Your Vignettes</string>
+    <string name="header_albums">Your Albums</string>
+    <string name="header_vignettes">Vignettes</string>
+    <string name="header_moments">Today\'s Moments</string>
+
+    <string name="onboarding_main">Memento</string>
+    <string name="onboarding_main_1">Remember the moments that matter the most</string>
+    <string name="onboarding_main_2">With Memento, never forget to capture something meaningful. We\'ll remember for you.</string>
+    <string name="onboarding_notice">Choose What Memento Notices</string>
+    <string name="onboarding_notice_1">You decide what Memento can use to recognize meaningful moments.</string>
+    <string name="onboarding_home">Keep Home Private</string>
+    <string name="onboarding_home_1">Set a Home Zone so Memento won\'t suggest everyday moments around home.</string>
+
+    <string name="vignette_journal">Journal</string>
+    <string name="vignette_albums">Albums</string>
+
+    <string name="fields_title">Title *</string>
+    <string name="fields_photo">Photo</string>
+    <string name="fields_date_time">Date &amp; Time</string>
+    <string name="fields_location">Location</string>
+    <string name="fields_weather">Weather</string>
+    <string name="fields_mood">Mood</string>
+    <string name="fields_journal">Journal</string>
+    <string name="fields_privacy">Privacy &amp; Settings</string>
+    <string name="fields_home">Home Zone</string>
+    <string name="fields_exclude">Exclusion Radius</string>
+    <string name="fields_notifications">Notifications</string>
+    <string name="fields_theme">Theme</string>
+
+    <string name="card_vignette">Vignette image</string>
+    <string name="card_vignette_title">Pretty Sunset</string>
+    <string name="card_vignette_date">September 15, 2026</string>
+    <string name="card_vignette_location">UCF</string>
+    <string name="card_vignette_weather">Clear · 84°F</string>
+    <string name="card_favorite">Favorite icon</string>
+    <string name="card_mood">Mood icon</string>
+    <string name="card_album_title">Beach Trips</string>
+
 </resources>
