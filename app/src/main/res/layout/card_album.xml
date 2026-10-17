@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="156dp"
+    android:layout_height="160dp"
+    android:background="@drawable/card_background">
+
+    <!-- Defaults to a dark beige square -->
+    <ImageView
+        android:id="@+id/albumImage1"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/card_album_image_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/card_vignette"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Defaults to a dark beige square -->
+    <ImageView
+        android:id="@+id/albumImage2"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/card_album_image_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/card_vignette"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Defaults to a dark beige square -->
+    <ImageView
+        android:id="@+id/albumImage3"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="3.5dp"
+        android:background="@drawable/card_album_image_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/card_vignette"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumImage1" />
+
+    <!-- Defaults to a dark beige square -->
+    <ImageView
+        android:id="@+id/albumImage4"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="3.5dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/card_album_image_rounded"
+        android:clipToOutline="true"
+        android:contentDescription="@string/card_vignette"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumImage2" />
+
+    <!-- Defaults to not favorite -->
+    <ImageButton
+        android:id="@+id/albumFavoriteButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/card_favorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumImage4"
+        app:srcCompat="@drawable/icon_favorite_empty" />
+
+    <!-- Defaults to Beach Trips -->
+    <TextView
+        android:id="@+id/albumTitle"
+        style="@style/Memento.AlbumCardTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/card_album_title"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vignetteFavoriteButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumImage3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

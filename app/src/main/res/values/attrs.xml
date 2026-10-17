@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MementoToolbar">
+        <attr name="toolbarTitle" format="string" />
+        <attr name="toolbarLeftIcon" format="reference" />
+        <attr name="toolbarRightIcon" format="reference" />
+        <attr name="toolbarLeftDescription" format="string" />
+        <attr name="toolbarRightDescription" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="VignetteCard">
+        <attr name="vignetteTitle" format="string" />
+        <attr name="vignetteDate" format="string" />
+        <attr name="vignetteLocation" format="string" />
+        <attr name="vignetteWeather" format="string" />
+        <attr name="vignetteImage" format="reference" />
+        <attr name="vignetteFavorite" format="boolean" />
+        <attr name="vignetteMood" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="AlbumCard">
+        <attr name="albumTitle" format="string" />
+        <attr name="albumImage1" format="reference" />
+        <attr name="albumImage2" format="reference" />
+        <attr name="albumImage3" format="reference" />
+        <attr name="albumImage4" format="reference" />
+        <attr name="albumFavorite" format="boolean" />
+    </declare-styleable>
+
+</resources>
