@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="328dp"
     android:layout_height="112dp"
-    android:background="@drawable/card_background">
+    android:background="@drawable/card_background"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" >
 
     <!-- Defaults to an image icon -->
     <ImageView
@@ -31,7 +33,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="4dp"
         android:text="@string/card_vignette_title"
-        app:layout_constraintBottom_toTopOf="@id/vignetteDateTime"
+        app:layout_constraintBottom_toTopOf="@id/vignetteDate"
         app:layout_constraintEnd_toStartOf="@+id/vignetteFavoriteButton"
         app:layout_constraintStart_toEndOf="@id/vignetteImage"
         app:layout_constraintTop_toTopOf="@id/vignetteImage"
@@ -39,7 +41,7 @@
 
     <!-- Defaults to September 15, 2026 -->
     <TextView
-        android:id="@+id/vignetteDateTime"
+        android:id="@+id/vignetteDate"
         style="@style/Memento.CardDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,7 +63,7 @@
         android:layout_marginStart="12dp"
         android:text="@string/card_vignette_location"
         app:layout_constraintStart_toEndOf="@id/vignetteImage"
-        app:layout_constraintTop_toBottomOf="@id/vignetteDateTime"
+        app:layout_constraintTop_toBottomOf="@id/vignetteDate"
         app:layout_constraintBottom_toTopOf="@id/vignetteWeather"
         android:visibility="gone"
         tools:visibility="visible" />
@@ -101,7 +103,7 @@
     for users who do not track mood
     When visible, defaults to super happy -->
     <ImageView
-        android:id="@+id/moodIcon"
+        android:id="@+id/vignetteMoodIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"

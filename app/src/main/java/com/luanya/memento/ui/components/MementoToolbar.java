@@ -14,7 +14,7 @@ import android.content.res.TypedArray;
 
 /* To use, add something like this in your activity's XML:
 
-<com.luanya.memento.ui.components.Toolbar
+<com.luanya.memento.ui.components.MementoToolbar
     android:id="@+id/mementoToolbar"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -61,8 +61,8 @@ public class MementoToolbar extends ConstraintLayout {
             String title = attributes.getString(R.styleable.MementoToolbar_toolbarTitle);
             int leftIcon = attributes.getResourceId(R.styleable.MementoToolbar_toolbarLeftIcon, 0);
             int rightIcon = attributes.getResourceId(R.styleable.MementoToolbar_toolbarRightIcon, 0);
-            String leftDescription = attributes.getString(R.styleable.MementoToolbar_toolbarLeftDescription);
-            String rightDescription = attributes.getString(R.styleable.MementoToolbar_toolbarRightDescription);
+            int leftDescription = attributes.getResourceId(R.styleable.MementoToolbar_toolbarLeftDescription, 0);
+            int rightDescription = attributes.getResourceId(R.styleable.MementoToolbar_toolbarRightDescription, 0);
 
             // Apply them
             if (title != null) {
@@ -74,10 +74,10 @@ public class MementoToolbar extends ConstraintLayout {
             if (rightIcon != 0) {
                 setToolbarRightButton(rightIcon);
             }
-            if (leftDescription != null) {
+            if (leftDescription != 0) {
                 setToolbarLeftButtonDesc(leftDescription);
             }
-            if (rightDescription != null) {
+            if (rightDescription != 0) {
                 setToolbarRightButtonDesc(rightDescription);
             }
         }
@@ -112,12 +112,12 @@ public class MementoToolbar extends ConstraintLayout {
     }
 
     // Update the content description for the toolbar's left button
-    public void setToolbarLeftButtonDesc(String description) {
-        toolbarLeftButton.setContentDescription(description);
+    public void setToolbarLeftButtonDesc(int description) {
+        toolbarLeftButton.setContentDescription(getContext().getString(description));
     }
 
     // Update the content description for the toolbar's right button
-    public void setToolbarRightButtonDesc(String description) {
-        toolbarRightButton.setContentDescription(description);
+    public void setToolbarRightButtonDesc(int description) {
+        toolbarRightButton.setContentDescription(getContext().getString(description));
     }
 }

@@ -1,64 +1,81 @@
 package com.luanya.memento;
 
-import android.os.Bundle;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
-import androidx.fragment.app.Fragment;
+public class Vignette {
+    private int id;
+    private String title;
+    private String date;
+    private String location;
+    private String weather;
+    private int temp;
+    private String journalEntry;
+    private boolean isFavorite;
+    private int mood;
+    private String imagePath;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Vignette#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Vignette extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Vignette() {
-        // Required empty public constructor
+    // Constructor
+    public Vignette (int id, String ttl, String dt, String loc,
+                    String wthr, int tmp, String jrnl,
+                    boolean fave, int md, String img) {
+        this.id = id;
+        title = ttl;
+        date = dt;
+        location = loc;
+        weather = wthr;
+        temp = tmp;
+        journalEntry = jrnl;
+        isFavorite = fave;
+        mood = md;
+        imagePath = img;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Vignette.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Vignette newInstance(String param1, String param2) {
-        Vignette fragment = new Vignette();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    // Getter methods
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public String getTitle() {
+        return title;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vignette, container, false);
+    public String getDate() {
+        return date;
+    }
+
+    public String getFormattedDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+        LocalDateTime ldt = LocalDateTime.parse(date, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return ldt.format(dtf);
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public String getJournalEntry() {
+        return journalEntry;
+    }
+
+    public boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public int getMood() {
+        return mood;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }
