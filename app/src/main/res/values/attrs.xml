@@ -14,7 +14,6 @@
         <attr name="vignetteDate" format="string" />
         <attr name="vignetteLocation" format="string" />
         <attr name="vignetteWeather" format="string" />
-        <attr name="vignetteImage" format="reference" />
         <attr name="vignetteFavorite" format="boolean" />
         <attr name="vignetteMood" format="reference" />
     </declare-styleable>

@@ -2,6 +2,7 @@ package com.luanya.memento.ui.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ import com.luanya.memento.R;
     app:vignetteDate="@string/card_vignette_date"
     app:vignetteLocation="@string/card_vignette_location"
     app:vignetteWeather="@string/card_vignette_weather"
-    app:vignetteImage="@drawable/placeholder_picture"
     app:vignetteFavorite="false"
     app:vignetteMood="@drawable/mood_super_happy" />
 
@@ -57,11 +57,11 @@ public class VignetteCard extends ConstraintLayout {
 
         // Grab the vignette components
         vignetteTitle = findViewById(R.id.vignetteTitle);
-        vignetteDate = findViewById(R.id.vignetteDateTime);
+        vignetteDate = findViewById(R.id.vignetteDate);
         vignetteLocation = findViewById(R.id.vignetteLocation);
         vignetteWeather = findViewById(R.id.vignetteWeather);
         vignetteFavorite = findViewById(R.id.vignetteFavoriteButton);
-        vignetteMood = findViewById(R.id.moodIcon);
+        vignetteMood = findViewById(R.id.vignetteMoodIcon);
         vignetteImage = findViewById(R.id.vignetteImage);
 
         // Read the vignette attributes
@@ -74,7 +74,6 @@ public class VignetteCard extends ConstraintLayout {
             String weather = attributes.getString(R.styleable.VignetteCard_vignetteWeather);
             boolean favorite = attributes.getBoolean(R.styleable.VignetteCard_vignetteFavorite, false);
             int mood = attributes.getResourceId(R.styleable.VignetteCard_vignetteMood, 0);
-            int image = attributes.getResourceId(R.styleable.VignetteCard_vignetteImage, 0);
 
             // Apply them
             if (title != null) {
@@ -92,9 +91,7 @@ public class VignetteCard extends ConstraintLayout {
             if (mood != 0) {
                 setVignetteMood(mood);
             }
-            if (image != 0) {
-                setVignetteImage(image);
-            }
+            setVignetteImage(null);
             setVignetteFavorite(favorite);
         }
     }
@@ -132,13 +129,21 @@ public class VignetteCard extends ConstraintLayout {
 
     // Set mood icon
     public void setVignetteMood(int drawableId) {
-        vignetteMood.setImageResource(drawableId);
-        vignetteMood.setVisibility(View.VISIBLE);
+        if (drawableId == 0) {
+            vignetteMood.setVisibility(View.INVISIBLE);
+        } else {
+            vignetteMood.setImageResource(drawableId);
+            vignetteMood.setVisibility(View.VISIBLE);
+        }
     }
 
     // Set image
-    public void setVignetteImage(int drawableId) {
-        vignetteImage.setImageResource(drawableId);
+    public void setVignetteImage(Bitmap image) {
+        if (image == null) {
+            vignetteImage.setImageResource(R.drawable.placeholder_picture);
+        } else {
+            vignetteImage.setImageBitmap(image);
+        }
     }
 
     // Attach an OnClickListener to the favorite button

@@ -3,40 +3,34 @@ package com.luanya.memento;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainPage#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.luanya.memento.ui.components.MementoToolbar;
+
+import java.util.List;
+
 public class MainPage extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private MementoToolbar tb;
+    private TextView header;
+    private TextView empty;
+    private RecyclerView rv;
 
     public MainPage() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainPage.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MainPage newInstance(String param1, String param2) {
         MainPage fragment = new MainPage();
         Bundle args = new Bundle();
@@ -58,7 +52,42 @@ public class MainPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_page, container, false);
+        // Inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_main_page, container, false);
+
+        // Grab resources
+        tb = inflatedView.findViewById(R.id.mainPageToolbar);
+        header = inflatedView.findViewById(R.id.mainPageTitle);
+        empty = inflatedView.findViewById(R.id.mainPageEmpty);
+        rv = inflatedView.findViewById(R.id.mainPageRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+
+        // Update the toolbar
+        tb.setToolbarLeftButton(R.drawable.icon_settings);
+        tb.setToolbarLeftButtonDesc(R.string.icon_settings);
+        tb.setToolbarRightButton(R.drawable.icon_scrapbook);
+        tb.setToolbarRightButtonDesc(R.string.icon_scrapbook);
+
+        // Set the toolbar's left button listener
+        tb.setToolbarLeftButtonOnClick(view -> getParentFragmentManager()
+                .beginTransaction().replace(R.id.fragment, Settings.class, null)
+                .addToBackStack(null).commit());
+
+        // Set the toolbar's right button listener
+        tb.setToolbarRightButtonOnClick(view -> getParentFragmentManager()
+                .beginTransaction().replace(R.id.fragment, Scrapbook.class,null)
+                .addToBackStack(null).commit());
+
+        // Load the vignette data into the recycler view
+        // Currently set to read sample data, but later will read actual user data
+        List<Vignette> vignettes = ReadSampleData.getVignettesData(inflatedView.getContext());
+        rv.setAdapter(new VignetteAdapter(vignettes));
+
+        // If there are vignettes, hide the empty label
+        if (!vignettes.isEmpty()) {
+            empty.setVisibility(View.GONE);
+        }
+
+        return inflatedView;
     }
 }
