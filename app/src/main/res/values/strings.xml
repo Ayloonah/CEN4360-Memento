@@ -50,5 +50,7 @@
     <string name="card_favorite">Favorite icon</string>
     <string name="card_mood">Mood icon</string>
     <string name="card_album_title">Beach Trips</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
