@@ -1,7 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- create a vignette (mem-32 / design page 9) -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateVignette" />
+    android:background="@color/mem_background"
+    tools:context=".CreateVignette">
+
+    <!-- shared toolbar (back arrow is its default left button) -->
+    <com.luanya.memento.ui.components.MementoToolbar
+        android:id="@+id/createVignetteToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="64dp"
+        android:elevation="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:toolbarTitle="@string/toolbar_create_vignette" />
+
+    <!-- everything under the toolbar scrolls -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/createVignetteToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- white card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- title (required) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fields_title"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <EditText
+                android:id="@+id/titleInput"
+                style="@style/Memento.Input"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:hint="@string/hint_vignette_title"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/titleError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/el_messiri_semibold"
+                android:text="@string/error_title_required"
+                android:textColor="@color/cv_error"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <!-- photo (optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/fields_photo"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <LinearLayout
+                android:id="@+id/photoBox"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/photoIcon"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="@string/icon_add_photo"
+                    android:src="@drawable/placeholder_picture" />
+
+                <TextView
+                    android:id="@+id/photoLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:fontFamily="@font/el_messiri"
+                    android:text="@string/label_add_photo"
+                    android:textColor="@color/mem_text_pale"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- date and time -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/fields_date_time"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <TextView
+                android:id="@+id/dateTimeField"
+                style="@style/Memento.Input"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:drawableEnd="@drawable/icon_calendar"
+                android:focusable="true"
+                tools:text="09/23/2026 10:30 PM" />
+
+            <!-- location and weather side by side -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fields_location"
+                        android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+                    <EditText
+                        android:id="@+id/locationInput"
+                        style="@style/Memento.Input"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="6dp"
+                        android:hint="@string/hint_add_location"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords"
+                        android:maxLines="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fields_weather"
+                        android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+                    <TextView
+                        android:id="@+id/weatherField"
+                        style="@style/Memento.Input"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="6dp"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:focusable="true"
+                        android:hint="@string/hint_add_weather"
+                        android:maxLines="1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- mood faces in the same 1-5 order as the adapter -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/fields_mood"
+                    android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+                <ImageView
+                    android:id="@+id/mood1"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icon_mood_super_unhappy"
+                    android:src="@drawable/mood_super_unhappy" />
+
+                <ImageView
+                    android:id="@+id/mood2"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icon_mood_unhappy"
+                    android:src="@drawable/mood_unhappy" />
+
+                <ImageView
+                    android:id="@+id/mood3"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icon_mood_neutral"
+                    android:src="@drawable/mood_neutral" />
+
+                <ImageView
+                    android:id="@+id/mood4"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icon_mood_happy"
+                    android:src="@drawable/mood_happy" />
+
+                <ImageView
+                    android:id="@+id/mood5"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icon_mood_super_happy"
+                    android:src="@drawable/mood_super_happy" />
+            </LinearLayout>
+
+            <!-- journal -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/fields_journal"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <EditText
+                android:id="@+id/journalInput"
+                style="@style/Memento.Input.Multiline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:hint="@string/hint_journal"
+                android:importantForAutofill="no"
+                android:minLines="6" />
+
+            <!-- save -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/saveButton"
+                style="@style/Memento.SmallButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:text="@string/button_save"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

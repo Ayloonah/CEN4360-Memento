@@ -58,6 +58,24 @@
     <string name="card_favorite">Favorite icon</string>
     <string name="card_mood">Mood icon</string>
     <string name="card_album_title">Beach Trips</string>
+    <!-- Create Vignette -->
+    <string name="hint_vignette_title">Vignette title</string>
+    <string name="hint_add_location">Add location</string>
+    <string name="hint_add_weather">Add weather</string>
+    <string name="hint_journal">Write something about this moment…</string>
+    <string name="label_add_photo">Add Photo</string>
+    <string name="label_photo_added">Tap to remove photo</string>
+    <string name="error_title_required">Please give your vignette a title.</string>
+    <string name="button_save">Save</string>
+    <string name="button_done">Done</string>
+    <string name="button_clear">Clear</string>
+    <string name="dialog_vignette_saved">Vignette saved</string>
+    <string name="icon_add_photo">Add photo</string>
+    <string name="icon_mood_super_unhappy">Mood: very unhappy</string>
+    <string name="icon_mood_unhappy">Mood: unhappy</string>
+    <string name="icon_mood_neutral">Mood: neutral</string>
+    <string name="icon_mood_happy">Mood: happy</string>
+    <string name="icon_mood_super_happy">Mood: very happy</string>
 
     <!-- Menu items -->
     <string name="menu_album_edit">Edit album name</string>
