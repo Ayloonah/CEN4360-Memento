@@ -25,7 +25,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainPageTitle"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_vignette" />
+        tools:listitem="@layout/item_vignette"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false" />
 
     <TextView
         android:id="@+id/mainPageTitle"
@@ -52,6 +54,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainPageTitle"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.05" />
+
+    <ImageButton
+        android:id="@+id/mainPageAdd"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_circle"
+        android:contentDescription="@string/icon_add"
+        android:elevation="3dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/mainPageRecycler"
+        app:layout_constraintEnd_toEndOf="@+id/mainPageRecycler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

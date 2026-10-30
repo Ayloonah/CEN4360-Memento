@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.luanya.memento.ui.components.MementoToolbar;
 
@@ -23,9 +24,9 @@ public class MainPage extends Fragment {
     private String mParam2;
 
     private MementoToolbar tb;
-    private TextView header;
     private TextView empty;
     private RecyclerView rv;
+    private ImageButton add;
 
     public MainPage() {
         // Required empty public constructor
@@ -57,10 +58,10 @@ public class MainPage extends Fragment {
 
         // Grab resources
         tb = inflatedView.findViewById(R.id.mainPageToolbar);
-        header = inflatedView.findViewById(R.id.mainPageTitle);
         empty = inflatedView.findViewById(R.id.mainPageEmpty);
         rv = inflatedView.findViewById(R.id.mainPageRecycler);
         rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+        add = inflatedView.findViewById(R.id.mainPageAdd);
 
         // Update the toolbar
         tb.setToolbarLeftButton(R.drawable.icon_settings);
@@ -83,9 +84,35 @@ public class MainPage extends Fragment {
         List<Vignette> vignettes = ReadSampleData.getVignettesData(inflatedView.getContext());
         rv.setAdapter(new VignetteAdapter(vignettes));
 
+        // Add button menu and listener
+        add.setOnClickListener(view -> {
+            PopupMenu menu = new PopupMenu(getContext(), view);
+            menu.inflate(R.menu.menu_add_new_vignette);
+
+            // Set the menu on item selected listener
+            menu.setOnMenuItemClickListener(menuItem -> {
+                // Navigates to CreateVignette
+                if (menuItem.getItemId() == R.id.new_vignette_add) {
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment, CreateVignette.newInstance(false, -1), null)
+                            .addToBackStack(null).commit();
+                } else { // If new_candidate_add, navigates to Candidates
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment, Candidates.class, null)
+                            .addToBackStack(null).commit();
+                }
+
+                return true;
+            });
+
+            menu.show();
+        });
+
         // If there are vignettes, hide the empty label
         if (!vignettes.isEmpty()) {
             empty.setVisibility(View.GONE);
+        } else {
+            empty.setVisibility(View.VISIBLE);
         }
 
         return inflatedView;
