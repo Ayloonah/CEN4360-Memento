@@ -6,6 +6,7 @@
     <string name="icon_menu">Open options</string>
     <string name="icon_settings">Navigate to settings</string>
     <string name="icon_scrapbook">Navigate to Scrapbook</string>
+    <string name="icon_add">Add Vignette</string>
 
     <!-- Toolbar labels -->
     <string name="toolbar_memento">Memento</string>
@@ -75,7 +76,17 @@
     <string name="icon_mood_neutral">Mood: neutral</string>
     <string name="icon_mood_happy">Mood: happy</string>
     <string name="icon_mood_super_happy">Mood: very happy</string>
+
+    <!-- Menu items -->
+    <string name="menu_album_edit">Edit album name</string>
+    <string name="menu_album_delete">Delete this album</string>
+    <string name="menu_add_new_vignette">Create a Vignette</string>
+    <string name="menu_add_candidate">Add Vignette from Candidates</string>
+    <string name="menu_add_existing_vignette">Add from existing Vignettes</string>
+    <string name="menu_add_new_to_album">Add new Vignette to album</string>
+
     <!-- Misc labels -->
     <string name="label_no_vignettes">No Vignettes yet.\nClick on the + to get started!</string>
+    <string name="label_empty_album">No Vignettes in this album yet.\nClick on the + to get started!</string>
 
 </resources>

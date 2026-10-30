@@ -3,45 +3,40 @@ package com.luanya.memento;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AlbumFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.luanya.memento.ui.components.MementoToolbar;
+
+import java.util.List;
+
 public class AlbumFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_ALBUM_ID = "albumID";
+    private static final String ARG_ALBUM_NAME = "albumName";
+    private int albumID;
+    private String albumName;
+    private MementoToolbar tb;
+    private TextView empty;
+    private RecyclerView rv;
+    private ImageButton add;
 
     public AlbumFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Album.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AlbumFragment newInstance(String param1, String param2) {
+    public static AlbumFragment newInstance(int albumID, String albumName) {
         AlbumFragment fragment = new AlbumFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_ALBUM_ID, albumID);
+        args.putString(ARG_ALBUM_NAME, albumName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,15 +45,98 @@ public class AlbumFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            albumID = getArguments().getInt(ARG_ALBUM_ID);
+            albumName = getArguments().getString(ARG_ALBUM_NAME);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_album, container, false);
+        // Inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_album, container, false);
+
+        // Grab resources
+        tb = inflatedView.findViewById(R.id.albumDetailToolbar);
+        empty = inflatedView.findViewById(R.id.albumDetailEmpty);
+        rv = inflatedView.findViewById(R.id.albumDetailRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+        add = inflatedView.findViewById(R.id.albumDetailAdd);
+
+        // Update the toolbar
+        tb.setToolbarLeftButton(R.drawable.icon_back_arrow);
+        tb.setToolbarLeftButtonDesc(R.string.icon_back);
+        tb.setToolbarRightButton(R.drawable.icon_menu);
+        tb.setToolbarRightButtonDesc(R.string.icon_menu);
+        tb.setToolbarTitle(albumName);
+
+        // Set the toolbar's left button listener
+        tb.setToolbarLeftButtonOnClick(view -> getParentFragmentManager()
+                .popBackStack());
+
+        // Set the toolbar's right button listener
+        tb.setToolbarRightButtonOnClick(view -> {
+            PopupMenu menu = new PopupMenu(getContext(), view);
+            menu.inflate(R.menu.menu_album_options);
+
+            // Set the menu on item selected listener
+            // Temporarily toasts, will implement later
+            menu.setOnMenuItemClickListener(menuItem -> {
+                Toast toast = new Toast(requireContext());
+
+                if (menuItem.getItemId() == R.id.album_edit) {
+                    toast.setText("Implement edit album name!");
+                } else { // If album_delete
+                    toast.setText("Implement delete album!");
+                }
+
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.show();
+
+                return true;
+            });
+
+            menu.show();
+        });
+
+        // Load the album's vignettes into the recycler view
+        // Currently set to read sample data, but later will read actual user data
+        List<Vignette> vignettes = ReadSampleData.getAlbumVignettes(inflatedView.getContext(), albumID);
+        rv.setAdapter(new VignetteAdapter(vignettes));
+
+        // Add button menu and listener
+        add.setOnClickListener(view -> {
+            PopupMenu menu = new PopupMenu(getContext(), view);
+            menu.inflate(R.menu.menu_add_to_album);
+
+            // Set the menu on item selected listener
+            menu.setOnMenuItemClickListener(menuItem -> {
+                // Will eventually have an alert dialog window with a list of Vignettes to choose from
+                // Toast for now
+                if (menuItem.getItemId() == R.id.existing_vignette_add) {
+                    Toast toast = new Toast(requireContext());
+                    toast.setText("Implement choose from existing Vignettes!");
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.show();
+                } else { // If new_vignette_to_album, navigates to CreateVignette
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment, CreateVignette.newInstance(true, albumID), null)
+                            .addToBackStack(null).commit();
+                }
+
+                return true;
+            });
+
+            menu.show();
+        });
+
+        // If there are vignettes, hide the empty label
+        if (!vignettes.isEmpty()) {
+            empty.setVisibility(View.GONE);
+        } else {
+            empty.setVisibility(View.VISIBLE);
+        }
+
+        return inflatedView;
     }
 }
