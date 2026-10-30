@@ -15,5 +15,6 @@
     <color name="mem_border">#C5B3C8</color>
     <color name="mem_border_pale">#D9CDC4</color>
     <color name="mem_input_background">#F8F4EF</color>
+    <color name="cv_error">#B3261E</color>
 
 </resources>
