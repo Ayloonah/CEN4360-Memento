@@ -11,9 +11,9 @@ import org.json.*;
 
 public class ReadSampleData {
 
-    // Grabs the sample data from JSON and returns a list with it
-    public static List<Vignette> getVignettesData(Context context) {
-        List<Vignette> vignettes = new ArrayList<>();
+    // Read JSON array helper method
+    private static JSONArray readJson(Context context, String data) throws IOException, JSONException {
+        JSONArray arr;
         StringBuilder sb = new StringBuilder();
 
         // Grab the assets
@@ -30,7 +30,19 @@ public class ReadSampleData {
 
             // Create the JSON array
             JSONObject json = new JSONObject(sb.toString());
-            JSONArray arr = json.getJSONArray("vignettes");
+            arr = json.getJSONArray(data);
+
+            return arr;
+        }
+    }
+
+    // Grabs the sample data from JSON and returns a list with it
+    public static List<Vignette> getVignettesData(Context context) {
+        List<Vignette> vignettes = new ArrayList<>();
+
+        // Open the JSON, read it
+        try {
+            JSONArray arr = readJson(context, "vignettes");
 
             // Build a vignette from each JSON object
             for (int i = 0; i < arr.length(); i++) {
@@ -72,6 +84,40 @@ public class ReadSampleData {
             return BitmapFactory.decodeStream(is);
         } catch (IOException e) {
             return null;
+        }
+    }
+
+    // Grab an album's Vignettes
+    public static List<Vignette> getAlbumVignettes(Context context, int album) {
+        List<Vignette> albumVignettes = new ArrayList<>();
+        List<Vignette> vignettes;
+        HashSet<Integer> inAlbum = new HashSet<>();
+
+        // Open the JSON, read it
+        try {
+            JSONArray arr = readJson(context, "album_vignettes");
+
+            // Find the vignettes belonging to this album and add their ID to the set
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+                if (obj.getInt("album_id") == album) {
+                    inAlbum.add(obj.getInt("vignette_id"));
+                }
+            }
+
+            // Grab the vignettes
+            vignettes = getVignettesData(context);
+
+            // Add the ones in the set to the albumVignettes array
+            for (Vignette v : vignettes) {
+                if (inAlbum.contains(v.getId())) {
+                    albumVignettes.add(v);
+                }
+            }
+
+            return albumVignettes;
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 }

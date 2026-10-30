@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/new_vignette_add"
+        android:title="@string/menu_add_new_vignette" />
+
+    <item android:id="@+id/new_candidate_add"
+        android:title="@string/menu_add_candidate" />
+
+</menu>
