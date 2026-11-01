@@ -96,6 +96,33 @@ public class ReadSampleData {
             throw new RuntimeException(e);
         }
     }
+
+    // grabs the sample albums from JSON and returns a list with them
+    public static List<Album> getAlbumsData(Context context) {
+        List<Album> albums = new ArrayList<>();
+
+        try {
+            JSONArray arr = readJson(context, "albums");
+
+            // build an album from each JSON object
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+
+                albums.add(new Album(
+                        obj.getInt("album_id"),
+                        obj.getString("name"),
+                        obj.getString("created_at"),
+                        obj.getBoolean("is_favorite"),
+                        obj.getString("color")
+                ));
+            }
+
+            return albums;
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // Load an image
     public static Bitmap loadImage(Context context, String path) {
         // If no path, return
