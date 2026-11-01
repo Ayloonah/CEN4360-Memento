@@ -3,62 +3,56 @@ package com.luanya.memento;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Candidates#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.luanya.memento.ui.components.MementoToolbar;
+
+import java.util.List;
+
+// vignette candidates screen (mem-66 / design page 8)
+// shows today's sample candidates and tapping one opens create a vignette already filled in
 public class Candidates extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MementoToolbar tb;
+    private RecyclerView rv;
 
     public Candidates() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Candidates.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Candidates newInstance(String param1, String param2) {
-        Candidates fragment = new Candidates();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // android needs an empty constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_candidates, container, false);
+        // inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_candidates, container, false);
+
+        // grab resources
+        tb = inflatedView.findViewById(R.id.candidatesToolbar);
+        rv = inflatedView.findViewById(R.id.candidatesRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+
+        // back arrow goes back
+        tb.setToolbarLeftButtonOnClick(view -> getParentFragmentManager().popBackStack());
+
+        // load the candidates into the list
+        // sample data for now and real detection comes later in mem-73
+        List<VignetteCandidate> candidates = ReadSampleData.getCandidatesData(inflatedView.getContext());
+
+        // tapping a candidate opens create a vignette with its info filled in
+        rv.setAdapter(new CandidateAdapter(candidates, candidate -> getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, CreateVignette.class, CreateVignette.candidateArgs(
+                        candidate.getLocation(),
+                        candidate.getDate(),
+                        candidate.getWeather(),
+                        candidate.getTemp()))
+                .addToBackStack(null).commit()));
+
+        return inflatedView;
     }
 }

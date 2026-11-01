@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
+    tools:context=".Candidates"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Candidates" />
+    android:layout_height="match_parent">
+
+    <!-- shared toolbar (back arrow is its default left button) -->
+    <com.luanya.memento.ui.components.MementoToolbar
+        android:id="@+id/candidatesToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbarTitle="@string/toolbar_vignette_candidates" />
+
+    <!-- today's moments -->
+    <TextView
+        android:id="@+id/candidatesTitle"
+        style="@style/Memento.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/header_moments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatesToolbar" />
+
+    <!-- the candidate cards -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/candidatesRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatesTitle"
+        tools:listitem="@layout/item_candidate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

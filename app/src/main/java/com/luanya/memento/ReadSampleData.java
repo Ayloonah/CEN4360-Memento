@@ -70,7 +70,32 @@ public class ReadSampleData {
             throw new RuntimeException(e);
         }
     }
+    // grabs the sample candidates from JSON and returns a list with them
+    public static List<VignetteCandidate> getCandidatesData(Context context) {
+        List<VignetteCandidate> candidates = new ArrayList<>();
 
+        try {
+            JSONArray arr = readJson(context, "candidates");
+
+            // build a candidate from each JSON object
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+
+                candidates.add(new VignetteCandidate(
+                        obj.getInt("candidate_id"),
+                        obj.getString("location_name"),
+                        obj.getString("event_time"),
+                        obj.getString("weather"),
+                        obj.getInt("temperature_f"),
+                        obj.getString("reason")
+                ));
+            }
+
+            return candidates;
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
     // Load an image
     public static Bitmap loadImage(Context context, String path) {
         // If no path, return
