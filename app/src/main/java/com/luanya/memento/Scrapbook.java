@@ -3,62 +3,61 @@ package com.luanya.memento;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Scrapbook#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.luanya.memento.ui.components.MementoToolbar;
+
+import java.util.List;
+
+// scrapbook screen (mem-33 / design page 5)
+// shows the albums in a two column grid and tapping one opens that album
 public class Scrapbook extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MementoToolbar tb;
+    private RecyclerView rv;
+    private ImageButton add;
 
     public Scrapbook() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Scrapbook.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Scrapbook newInstance(String param1, String param2) {
-        Scrapbook fragment = new Scrapbook();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // android needs an empty constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scrapbook, container, false);
+        // inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_scrapbook, container, false);
+
+        // grab resources
+        tb = inflatedView.findViewById(R.id.scrapbookToolbar);
+        rv = inflatedView.findViewById(R.id.scrapbookRecycler);
+        rv.setLayoutManager(new GridLayoutManager(inflatedView.getContext(), 2));
+        add = inflatedView.findViewById(R.id.scrapbookAdd);
+
+        // back arrow goes back
+        tb.setToolbarLeftButtonOnClick(view -> getParentFragmentManager().popBackStack());
+
+        // load the albums into the grid
+        // sample data for now and real user data comes later in mem-73
+        List<Album> albums = ReadSampleData.getAlbumsData(inflatedView.getContext());
+
+        // tapping an album opens its page
+        rv.setAdapter(new AlbumAdapter(albums, album -> getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, AlbumFragment.newInstance(album.getId(), album.getName()), null)
+                .addToBackStack(null).commit()));
+
+        // + opens create an album
+        add.setOnClickListener(view -> getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, CreateAlbum.class, null)
+                .addToBackStack(null).commit());
+
+        return inflatedView;
     }
 }
