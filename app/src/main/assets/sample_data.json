@@ -215,5 +215,47 @@
     { "album_id": 8, "vignette_id": 4 },
     { "album_id": 8, "vignette_id": 10 },
     { "album_id": 8, "vignette_id": 11 }
+  ],
+  "candidates": [
+    {
+      "candidate_id": 1,
+      "location_name": "Lake Eola Park",
+      "event_time": "2026-09-23T16:15:00",
+      "weather": "Partly Cloudy",
+      "temperature_f": 81,
+      "reason": "new_location"
+    },
+    {
+      "candidate_id": 2,
+      "location_name": "UCF",
+      "event_time": "2026-09-23T14:48:00",
+      "weather": "Partly Cloudy",
+      "temperature_f": 84,
+      "reason": "activity_change"
+    },
+    {
+      "candidate_id": 3,
+      "location_name": "Winter Park",
+      "event_time": "2026-09-23T17:26:00",
+      "weather": "Clear",
+      "temperature_f": 82,
+      "reason": "new_location"
+    },
+    {
+      "candidate_id": 4,
+      "location_name": "Downtown Orlando",
+      "event_time": "2026-09-23T18:41:00",
+      "weather": "Light Rain",
+      "temperature_f": 78,
+      "reason": "weather_change"
+    },
+    {
+      "candidate_id": 5,
+      "location_name": "UCF",
+      "event_time": "2026-09-23T11:32:00",
+      "weather": "Sunny",
+      "temperature_f": 86,
+      "reason": "activity_change"
+    }
   ]
 }

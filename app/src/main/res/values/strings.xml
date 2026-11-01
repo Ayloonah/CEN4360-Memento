@@ -58,6 +58,16 @@
     <string name="card_favorite">Favorite icon</string>
     <string name="card_mood">Mood icon</string>
     <string name="card_album_title">Beach Trips</string>
+    <string name="card_candidate_title">Lake Eola Park · 4:15 PM</string>
+    <string name="card_candidate_date">September 23, 2026</string>
+    <string name="card_candidate_weather">Partly Cloudy · 81°F</string>
+    <string name="card_suggested">Suggested icon</string>
+    <string name="card_reason">Reason icon</string>
+
+    <!-- Candidate reasons -->
+    <string name="reason_new_location">New Location</string>
+    <string name="reason_activity_change">Activity Change</string>
+    <string name="reason_weather_change">Weather Change</string>
     <!-- Create Vignette -->
     <string name="hint_vignette_title">Vignette title</string>
     <string name="hint_add_location">Add location</string>

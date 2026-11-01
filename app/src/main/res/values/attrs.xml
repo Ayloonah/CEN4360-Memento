@@ -27,4 +27,12 @@
         <attr name="albumFavorite" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="CandidateCard">
+        <attr name="candidateTitle" format="string" />
+        <attr name="candidateDate" format="string" />
+        <attr name="candidateWeather" format="string" />
+        <attr name="candidateReason" format="string" />
+        <attr name="candidateReasonIcon" format="reference" />
+    </declare-styleable>
+
 </resources>
