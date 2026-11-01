@@ -61,4 +61,8 @@ public class GetStarted extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_get_started, container, false);
     }
+
+    // Move to the next fragment when clicking the "Get Started" button
+    public void getStarted() {
+    }
 }
