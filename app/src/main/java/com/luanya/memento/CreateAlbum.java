@@ -1,64 +1,156 @@
 package com.luanya.memento;
 
+import android.content.Context;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.*;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.luanya.memento.ui.components.MementoToolbar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateAlbum#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.*;
+
+// create an album screen (mem-97 / design page 11)
+// just the ui for now so nothing actually gets stored
+// real saving comes later in mem-73
 public class CreateAlbum extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    // how many vignettes show before browse all
+    private static final int PREVIEW_COUNT = 5;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MementoToolbar tb;
+    private EditText nameInput;
+    private TextView nameError;
+    private TextView browseAll;
+    private RecyclerView rv;
+    private ChooseVignetteAdapter adapter;
 
     public CreateAlbum() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateAlbum.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateAlbum newInstance(String param1, String param2) {
-        CreateAlbum fragment = new CreateAlbum();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        // android needs an empty constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_album, container, false);
+        // inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_create_album, container, false);
+
+        // grab all the pieces
+        tb = inflatedView.findViewById(R.id.createAlbumToolbar);
+        nameInput = inflatedView.findViewById(R.id.albumNameInput);
+        nameError = inflatedView.findViewById(R.id.albumNameError);
+        browseAll = inflatedView.findViewById(R.id.browseAllLink);
+        rv = inflatedView.findViewById(R.id.chooseVignettesRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+
+        // back arrow goes back
+        tb.setToolbarLeftButtonOnClick(view -> goBack());
+
+        // load the vignettes and show the first few
+        // sample data for now and real user data comes later in mem-73
+        List<Vignette> all = ReadSampleData.getVignettesData(inflatedView.getContext());
+        List<Vignette> preview = new ArrayList<>(all.subList(0, Math.min(PREVIEW_COUNT, all.size())));
+        adapter = new ChooseVignetteAdapter(preview);
+        rv.setAdapter(adapter);
+
+        // underline the browse all link like the design
+        browseAll.setPaintFlags(browseAll.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        // browse all shows every vignette and then hides itself
+        browseAll.setOnClickListener(view -> {
+            adapter.setVignettes(all);
+            browseAll.setVisibility(View.GONE);
+        });
+
+        // hide the link if there's nothing more to show
+        if (all.size() <= PREVIEW_COUNT) {
+            browseAll.setVisibility(View.GONE);
+        }
+
+        // get rid of the name error once they start typing
+        nameInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() > 0) {
+                    hideNameError();
+                }
+            }
+        });
+
+        // create button
+        inflatedView.findViewById(R.id.createButton)
+                .setOnClickListener(view -> create(view.getContext()));
+
+        return inflatedView;
+    }
+
+    // make sure there's a name and then "create" it and show what got made
+    private void create(Context context) {
+        String name = nameInput.getText().toString().trim();
+        if (name.isEmpty()) {
+            showNameError();
+            return;
+        }
+
+        String summary = "Name: " + name
+                + "\nVignettes: " + adapter.getSelectedCount()
+                + "\n\nSample save only. Nothing is stored yet.";
+
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.dialog_album_created)
+                .setMessage(summary)
+                .setPositiveButton(R.string.button_done, (dialog, which) -> goBack())
+                .setCancelable(false)
+                .show();
+    }
+
+    // red outline and message under the name
+    private void showNameError() {
+        nameError.setVisibility(View.VISIBLE);
+        setBackgroundKeepPadding(nameInput, R.drawable.input_background_error);
+        nameInput.requestFocus();
+    }
+
+    private void hideNameError() {
+        if (nameError.getVisibility() != View.VISIBLE) {
+            return;
+        }
+        nameError.setVisibility(View.GONE);
+        setBackgroundKeepPadding(nameInput, R.drawable.input_background);
+    }
+
+    // swapping the background can wipe the padding so put it back after
+    private void setBackgroundKeepPadding(View view, int drawableRes) {
+        int start = view.getPaddingStart();
+        int top = view.getPaddingTop();
+        int end = view.getPaddingEnd();
+        int bottom = view.getPaddingBottom();
+        view.setBackground(ContextCompat.getDrawable(view.getContext(), drawableRes));
+        view.setPaddingRelative(start, top, end, bottom);
+    }
+
+    // back to whatever screen opened this one
+    private void goBack() {
+        if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+            getParentFragmentManager().popBackStack();
+        }
     }
 }
