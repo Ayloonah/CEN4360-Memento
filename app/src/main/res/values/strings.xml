@@ -104,6 +104,15 @@
     <string name="icon_mood_happy">Mood: happy</string>
     <string name="icon_mood_super_happy">Mood: very happy</string>
 
+    <!-- Create Album -->
+    <string name="fields_album_name">Album Name *</string>
+    <string name="fields_choose_vignettes">Choose Vignettes</string>
+    <string name="hint_album_name">Album name</string>
+    <string name="label_browse_all">Browse All Vignettes</string>
+    <string name="error_album_name_required">Please give your album a name.</string>
+    <string name="button_create">Create</string>
+    <string name="dialog_album_created">Album created</string>
+
     <!-- Menu items -->
     <string name="menu_album_edit">Edit album name</string>
     <string name="menu_album_delete">Delete this album</string>

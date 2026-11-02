@@ -1,7 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- create an album (mem-97 / design page 11) -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    tools:context=".CreateAlbum"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreateAlbum" />
+    android:layout_height="match_parent">
+
+    <!-- shared toolbar (back arrow is its default left button) -->
+    <com.luanya.memento.ui.components.MementoToolbar
+        android:id="@+id/createAlbumToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbarTitle="@string/toolbar_create_album" />
+
+    <!-- white card -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/card_background"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createAlbumToolbar">
+
+        <!-- album name (required) -->
+        <TextView
+            android:id="@+id/albumNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fields_album_name"
+            android:textAppearance="@style/Memento.VignetteCardTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/albumNameInput"
+            style="@style/Memento.Input"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="6dp"
+            android:hint="@string/hint_album_name"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/albumNameLabel" />
+
+        <TextView
+            android:id="@+id/albumNameError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/el_messiri_semibold"
+            android:text="@string/error_album_name_required"
+            android:textColor="@color/cv_error"
+            android:textSize="13sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/albumNameInput" />
+
+        <!-- choose vignettes -->
+        <TextView
+            android:id="@+id/chooseVignettesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fields_choose_vignettes"
+            android:textAppearance="@style/Memento.VignetteCardTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/albumNameError" />
+
+        <!-- the vignette rows (shrinks to fit and scrolls when it's long) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chooseVignettesRecycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/browseAllLink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chooseVignettesLabel"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_choose_vignette" />
+
+        <!-- browse all link (underlined in java) -->
+        <TextView
+            android:id="@+id/browseAllLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/el_messiri_semibold"
+            android:paddingVertical="4dp"
+            android:text="@string/label_browse_all"
+            android:textColor="@color/mem_toolbar"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/createButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chooseVignettesRecycler" />
+
+        <!-- create -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createButton"
+            style="@style/Memento.SmallButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/button_create"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -119,7 +119,7 @@ public class CreateVignette extends Fragment {
         titleError = inflatedView.findViewById(R.id.titleError);
         locationInput = inflatedView.findViewById(R.id.locationInput);
         journalInput = inflatedView.findViewById(R.id.journalInput);
-        dateTimeField = inflatedView.findViewById(R.id.editText_settings_location);
+        dateTimeField = inflatedView.findViewById(R.id.dateTimeField);
         weatherField = inflatedView.findViewById(R.id.weatherField);
         photoLabel = inflatedView.findViewById(R.id.photoLabel);
         photoIcon = inflatedView.findViewById(R.id.photoIcon);
