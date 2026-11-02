@@ -123,6 +123,46 @@ public class ReadSampleData {
         }
     }
 
+    // grabs one vignette by its id (null if there isn't one)
+    public static Vignette getVignette(Context context, int id) {
+        for (Vignette v : getVignettesData(context)) {
+            if (v.getId() == id) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    // grabs the albums a vignette belongs to
+    public static List<Album> getVignetteAlbums(Context context, int vignette) {
+        List<Album> vignetteAlbums = new ArrayList<>();
+        HashSet<Integer> inAlbums = new HashSet<>();
+
+        try {
+            JSONArray arr = readJson(context, "album_vignettes");
+
+            // find the albums this vignette is in and add their id to the set
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+                if (obj.getInt("vignette_id") == vignette) {
+                    inAlbums.add(obj.getInt("album_id"));
+                }
+            }
+
+            // add the albums in the set to the list
+            for (Album a : getAlbumsData(context)) {
+                if (inAlbums.contains(a.getId())) {
+                    vignetteAlbums.add(a);
+                }
+            }
+
+            return vignetteAlbums;
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     // Load an image
     public static Bitmap loadImage(Context context, String path) {
         // If no path, return
