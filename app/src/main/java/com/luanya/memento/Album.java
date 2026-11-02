@@ -37,4 +37,9 @@ public class Album {
     public String getColor() {
         return color;
     }
+
+    // setter methods
+    public void setIsFavorite(boolean fave) {
+        isFavorite = fave;
+    }
 }

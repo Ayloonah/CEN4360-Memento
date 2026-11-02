@@ -78,4 +78,9 @@ public class Vignette {
     public String getImagePath() {
         return imagePath;
     }
+
+    // Setter methods
+    public void setIsFavorite(boolean fave) {
+        isFavorite = fave;
+    }
 }

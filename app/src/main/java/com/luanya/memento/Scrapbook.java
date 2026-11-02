@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.luanya.memento.ui.components.MementoToolbar;
 
@@ -22,6 +23,7 @@ public class Scrapbook extends Fragment {
     private MementoToolbar tb;
     private RecyclerView rv;
     private ImageButton add;
+    private TextView empty;
 
     public Scrapbook() {
         // android needs an empty constructor
@@ -38,6 +40,7 @@ public class Scrapbook extends Fragment {
         rv = inflatedView.findViewById(R.id.scrapbookRecycler);
         rv.setLayoutManager(new GridLayoutManager(inflatedView.getContext(), 2));
         add = inflatedView.findViewById(R.id.scrapbookAdd);
+        empty = inflatedView.findViewById(R.id.scrapbookEmpty);
 
         // back arrow goes back
         tb.setToolbarLeftButtonOnClick(view -> getParentFragmentManager().popBackStack());
@@ -57,6 +60,13 @@ public class Scrapbook extends Fragment {
                 .beginTransaction()
                 .replace(R.id.fragment, CreateAlbum.class, null)
                 .addToBackStack(null).commit());
+
+        // if there are albums, hide the empty label
+        if (!albums.isEmpty()) {
+            empty.setVisibility(View.GONE);
+        } else {
+            empty.setVisibility(View.VISIBLE);
+        }
 
         return inflatedView;
     }

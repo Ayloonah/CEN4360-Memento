@@ -93,11 +93,6 @@ public class CreateVignette extends Fragment {
         return args;
     }
 
-    // fake candidate that matches the first card on the candidates design
-    public static Bundle sampleCandidateArgs() {
-        return candidateArgs("Lake Eola Park", "2026-09-23T16:15:00", "Partly Cloudy", 81);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,7 +156,7 @@ public class CreateVignette extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().trim().length() > 0) {
+                if (!s.toString().trim().isEmpty()) {
                     hideTitleError();
                 }
             }
@@ -248,7 +243,8 @@ public class CreateVignette extends Fragment {
         if (weather == null) {
             weatherField.setText("");
         } else {
-            weatherField.setText(weather + " · " + temp + "°F");
+            String w = weather + " · " + temp + "°F";
+            weatherField.setText(w);
         }
     }
 
@@ -293,7 +289,7 @@ public class CreateVignette extends Fragment {
             photoLabel.setText(R.string.label_photo_added);
         } else {
             photoIcon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            photoIcon.setImageResource(R.drawable.placeholder_picture);
+            photoIcon.setImageResource(R.drawable.icon_add_photo);
             photoLabel.setText(R.string.label_add_photo);
         }
     }

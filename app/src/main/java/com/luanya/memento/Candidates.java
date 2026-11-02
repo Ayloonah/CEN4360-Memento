@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.luanya.memento.ui.components.MementoToolbar;
 
@@ -20,6 +21,7 @@ public class Candidates extends Fragment {
 
     private MementoToolbar tb;
     private RecyclerView rv;
+    private TextView empty;
 
     public Candidates() {
         // android needs an empty constructor
@@ -33,6 +35,7 @@ public class Candidates extends Fragment {
 
         // grab resources
         tb = inflatedView.findViewById(R.id.candidatesToolbar);
+        empty = inflatedView.findViewById(R.id.candidatesEmpty);
         rv = inflatedView.findViewById(R.id.candidatesRecycler);
         rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
 
@@ -52,6 +55,13 @@ public class Candidates extends Fragment {
                         candidate.getWeather(),
                         candidate.getTemp()))
                 .addToBackStack(null).commit()));
+
+        // if there are candidates, hide the empty label
+        if (!candidates.isEmpty()) {
+            empty.setVisibility(View.GONE);
+        } else {
+            empty.setVisibility(View.VISIBLE);
+        }
 
         return inflatedView;
     }

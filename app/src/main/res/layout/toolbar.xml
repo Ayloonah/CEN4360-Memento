@@ -11,8 +11,14 @@
     <!-- Defaults to Memento -->
     <TextView
         android:id="@+id/toolbarTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="60dp"
+        android:autoSizeMaxTextSize="32sp"
+        android:autoSizeMinTextSize="16sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:maxLines="1"
         android:text="@string/toolbar_memento"
         android:textAppearance="@style/Memento.ToolbarTitle"
         app:layout_constraintBottom_toBottomOf="parent"

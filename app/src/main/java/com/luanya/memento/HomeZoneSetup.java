@@ -3,40 +3,31 @@ package com.luanya.memento;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeZoneSetup#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeZoneSetup extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView home;
+    private TextView exclude;
+    private TextView skip;
+    private Button start;
+
 
     public HomeZoneSetup() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeZoneSetup.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeZoneSetup newInstance(String param1, String param2) {
         HomeZoneSetup fragment = new HomeZoneSetup();
         Bundle args = new Bundle();
@@ -58,7 +49,47 @@ public class HomeZoneSetup extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_zone_setup, container, false);
+        // Inflate the view
+        View inflatedView = inflater.inflate(R.layout.fragment_home_zone_setup, container, false);
+
+        // Grab resources
+        home = inflatedView.findViewById(R.id.field_Home);
+        exclude = inflatedView.findViewById(R.id.field_Exclude);
+        skip = inflatedView.findViewById(R.id.textView_Skip);
+        start = inflatedView.findViewById(R.id.button_home);
+
+        // Set the home on click listener
+        // Temporarily toast, will implement later
+        home.setOnClickListener(view -> {
+            Toast toast = new Toast(requireContext());
+            toast.setText("Implement set home location!");
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
+        });
+
+        // Set the exclusion radius on click listener
+        // Temporarily toast, will implement later
+        exclude.setOnClickListener(view -> {
+            Toast toast = new Toast(requireContext());
+            toast.setText("Implement choose exclusion radius!");
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
+        });
+
+        // Set the skip on click listener
+        skip.setOnClickListener(view -> {
+            FragmentManager fm = getParentFragmentManager();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fm.beginTransaction().replace(R.id.fragment, MainPage.class, null).commit();
+        });
+
+        //Set the start on click listener
+        start.setOnClickListener(view -> {
+            FragmentManager fm = getParentFragmentManager();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fm.beginTransaction().replace(R.id.fragment, MainPage.class, null).commit();
+        });
+
+        return inflatedView;
     }
 }

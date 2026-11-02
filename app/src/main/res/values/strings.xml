@@ -1,13 +1,19 @@
 <resources>
     <string name="app_name">Memento</string>
 
-    <!-- Icon content descriptions -->
+    <!-- Content descriptions -->
     <string name="icon_back">Navigate back</string>
     <string name="icon_menu">Open options</string>
     <string name="icon_settings">Navigate to settings</string>
     <string name="icon_scrapbook">Navigate to Scrapbook</string>
     <string name="icon_add">Add Vignette</string>
     <string name="icon_add_album">Add Album</string>
+    <string name="onboarding_picture_stack">Stack of pictures</string>
+    <string name="icon_location">Location icon</string>
+    <string name="icon_weather">Weather icon</string>
+    <string name="icon_mood">Mood icon</string>
+    <string name="icon_exercise">Exercise icon</string>
+    <string name="icon_filter">Filter Vignettes</string>
 
     <!-- Toolbar labels -->
     <string name="toolbar_memento">Memento</string>
@@ -85,6 +91,7 @@
     <string name="reason_new_location">New Location</string>
     <string name="reason_activity_change">Activity Change</string>
     <string name="reason_weather_change">Weather Change</string>
+
     <!-- Create Vignette -->
     <string name="hint_vignette_title">Vignette title</string>
     <string name="hint_add_location">Add location</string>
@@ -128,5 +135,9 @@
     <string name="label_empty_album">No Vignettes in this album yet.\nClick on the + to get started!</string>
     <string name="label_no_journal">No journal entry.</string>
     <string name="label_no_albums">Not in any albums yet.</string>
+    <string name="header_filter">Filter Vignettes</string>
+    <string name="label_filter_placeholder">Filters coming soon!</string>
+    <string name="label_no_candidates">No moments noticed yet today.\nCheck back later!</string>
+    <string name="label_empty_scrapbook">No albums yet.\nClick on the + to get started!</string>
 
 </resources>

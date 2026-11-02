@@ -1,5 +1,6 @@
 package com.luanya.memento;
 
+import android.graphics.Bitmap;
 import android.view.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,23 +52,26 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         holder.card.setAlbumTitle(a.getName());
         holder.card.setAlbumFavorite(a.getIsFavorite());
 
-        // one picture icon per vignette in the album (up to 4) and empty tiles for the rest
-        int count = ReadSampleData.getAlbumVignettes(holder.itemView.getContext(), a.getId()).size();
-        holder.card.setAlbumImage1(imageFor(0, count));
-        holder.card.setAlbumImage2(imageFor(1, count));
-        holder.card.setAlbumImage3(imageFor(2, count));
-        holder.card.setAlbumImage4(imageFor(3, count));
+        // load the photos from the album's first 4 vignettes
+        // Currently uses sample data, will use actual user data later
+        List<Vignette> vignettes = ReadSampleData.getAlbumVignettes(
+                holder.itemView.getContext(), a.getId());
+        List<Bitmap> photos = new ArrayList<>();
+        for (int i = 0; i < Math.min(4, vignettes.size()); i++) {
+            photos.add(ReadSampleData.loadImage(
+                    holder.itemView.getContext(), vignettes.get(i).getImagePath()));
+        }
+        holder.card.setAlbumPhotos(photos);
+
+        // tapping the star switches it between filled and empty
+        // this is a display only change, will actually implement later
+        holder.card.setAlbumFavOnClickListener(view -> {
+            a.setIsFavorite(!a.getIsFavorite());
+            holder.card.setAlbumFavorite(a.getIsFavorite());
+        });
 
         // tapping the card hands the album back to the screen
         holder.card.setOnClickListener(view -> listener.onAlbumClick(a));
-    }
-
-    // picture icon if this slot has a vignette, nothing (0) if it's empty
-    private int imageFor(int slot, int count) {
-        if (slot < count) {
-            return R.drawable.placeholder_picture;
-        }
-        return 0;
     }
 
     @Override
