@@ -93,7 +93,7 @@
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:contentDescription="@string/icon_add_photo"
-                    android:src="@drawable/placeholder_picture" />
+                    android:src="@drawable/icon_add_photo" />
 
                 <TextView
                     android:id="@+id/photoLabel"
@@ -121,7 +121,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
-                android:drawableEnd="@drawable/icon_calendar"
+                app:drawableEndCompat="@drawable/icon_calendar"
+                app:drawableTint="@color/mem_toolbar"
                 android:focusable="true"
                 tools:text="09/23/2026 10:30 PM" />
 

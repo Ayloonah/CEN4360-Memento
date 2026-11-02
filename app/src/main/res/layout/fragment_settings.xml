@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -9,7 +10,7 @@
 
     <com.luanya.memento.ui.components.MementoToolbar
         android:id="@+id/settingsToolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +21,9 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsToolbar">
@@ -35,8 +37,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- title (required) -->
-
+            <!-- privacy and tracking -->
             <TextView
                 android:id="@+id/TextView_PrivacyAndTracking"
                 android:layout_width="wrap_content"
@@ -46,113 +47,94 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_track_location"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fields_track_location" />
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_settings_location"
+                    style="@style/Memento.Switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:scaleX="1"
-                    android:thumbTint="@color/switch_color"
-                    android:trackTint="@color/switch_color" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_track_weather"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fields_track_weather" />
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_settings_weather"
+                    style="@style/Memento.Switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:scrollbarSize="4dp"
-                    android:thumbTint="@color/switch_color"
-                    android:trackTint="@color/switch_color" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_track_mood"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fields_track_mood" />
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_settings_mood"
+                    style="@style/Memento.Switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:scrollbarSize="4dp"
-                    android:thumbTint="@color/switch_color"
-                    android:trackTint="@color/switch_color" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_track_activity"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fields_track_activity" />
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_settings_activity"
+                    style="@style/Memento.Switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:scrollbarSize="4dp"
-                    android:thumbTint="@color/switch_color"
-                    android:trackTint="@color/switch_color" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
 
-            <!-- photo (optional) -->
-
-            <!-- date and time -->
-
+            <!-- home zone -->
             <TextView
                 android:id="@+id/textView_settings_homeZone"
                 android:layout_width="wrap_content"
@@ -162,18 +144,18 @@
                 android:textAppearance="@style/Memento.Subtitle" />
 
             <TextView
-                android:id="@+id/editText_settings_location"
+                android:id="@+id/field_settings_home"
                 style="@style/Memento.Input"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
-                android:drawableEnd="@drawable/icon_pin"
                 android:focusable="true"
-                tools:text="@string/fields_home_default" />
+                android:hint="@string/fields_home_default"
+                app:drawableEndCompat="@drawable/icon_pin"
+                app:drawableTint="@color/mem_toolbar" />
 
-            <!-- location and weather side by side -->
-
+            <!-- exclusion radius -->
             <TextView
                 android:id="@+id/textView_settings_exclude"
                 android:layout_width="match_parent"
@@ -183,106 +165,104 @@
                 android:textAppearance="@style/Memento.Subtitle" />
 
             <TextView
-                android:id="@+id/editText_settings_exclude"
+                android:id="@+id/field_settings_exclude"
                 style="@style/Memento.Input"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
                 android:focusable="true"
-                tools:text="@string/fields_exclude_default" />
+                android:text="@string/fields_exclude_default" />
 
+            <!-- notifications -->
             <TextView
                 android:id="@+id/textView_settings_notifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/fields_theme"
+                android:text="@string/fields_notifications"
                 android:textAppearance="@style/Memento.Subtitle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_notificationsLabel"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@string/fields_enable_notifications" />
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_settings_notifications"
+                    style="@style/Memento.Switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:scrollbarSize="4dp"
-                    android:thumbTint="@color/switch_color"
-                    android:trackTint="@color/switch_color" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_reminder"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="109dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@string/fields_reminder" />
 
                 <TextView
-                    android:id="@+id/editText_settings_theme2"
+                    android:id="@+id/field_settings_reminder"
                     style="@style/Memento.Input"
-                    android:layout_width="20dp"
+                    android:layout_width="110dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_weight="1"
                     android:clickable="true"
-                    android:drawableEnd="@drawable/icon_down"
                     android:focusable="true"
-                    tools:text="@string/fields_reminder_default" />
+                    android:text="@string/fields_reminder_default"
+                    app:drawableEndCompat="@drawable/icon_down"
+                    app:drawableTint="@color/mem_toolbar" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_settings_frequency"
                     style="@style/Memento.VignetteCardTitle"
-                    android:layout_width="107dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@string/fields_frequency" />
 
                 <TextView
-                    android:id="@+id/editText_settings_theme3"
+                    android:id="@+id/field_settings_frequency"
                     style="@style/Memento.Input"
-                    android:layout_width="20dp"
+                    android:layout_width="110dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_weight="1"
                     android:clickable="true"
-                    android:drawableEnd="@drawable/icon_down"
                     android:focusable="true"
-                    tools:text="@string/fields_frequency_default" />
+                    android:text="@string/fields_frequency_default"
+                    app:drawableEndCompat="@drawable/icon_down"
+                    app:drawableTint="@color/mem_toolbar" />
+
             </LinearLayout>
 
+            <!-- theme -->
             <TextView
                 android:id="@+id/textView_settings_theme"
                 android:layout_width="match_parent"
@@ -292,21 +272,17 @@
                 android:textAppearance="@style/Memento.Subtitle" />
 
             <TextView
-                android:id="@+id/editText_settings_theme"
+                android:id="@+id/field_settings_theme"
                 style="@style/Memento.Input"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
-                android:drawableEnd="@drawable/icon_down"
                 android:focusable="true"
-                tools:text="@string/fields_theme_default" />
+                android:text="@string/fields_theme_default"
+                app:drawableEndCompat="@drawable/icon_down"
+                app:drawableTint="@color/mem_toolbar" />
 
-            <!-- mood faces in the same 1-5 order as the adapter -->
-
-            <!-- journal -->
-
-            <!-- save -->
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

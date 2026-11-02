@@ -79,6 +79,8 @@
             app:layout_constraintTop_toBottomOf="@id/albumNameError" />
 
         <!-- the vignette rows (shrinks to fit and scrolls when it's long) -->
+
+        <!-- browse all link (underlined in java) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chooseVignettesRecycler"
             android:layout_width="0dp"
@@ -87,6 +89,7 @@
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toTopOf="@id/browseAllLink"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chooseVignettesLabel"
             app:layout_constraintVertical_bias="0"
@@ -94,7 +97,6 @@
             tools:itemCount="5"
             tools:listitem="@layout/item_choose_vignette" />
 
-        <!-- browse all link (underlined in java) -->
         <TextView
             android:id="@+id/browseAllLink"
             android:layout_width="wrap_content"
@@ -105,6 +107,9 @@
             android:text="@string/label_browse_all"
             android:textColor="@color/mem_toolbar"
             android:textSize="16sp"
+            android:drawablePadding="8dp"
+            app:drawableEndCompat="@drawable/icon_forward_arrow"
+            app:drawableTint="@color/mem_toolbar"
             app:layout_constraintBottom_toTopOf="@id/createButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chooseVignettesRecycler" />

@@ -76,6 +76,13 @@ public class VignetteAdapter extends RecyclerView.Adapter<VignetteAdapter.Vignet
 
         }
 
+        // Tapping the star switches it between filled and empty
+        // Only changes what's on screen for now, will properly implement later
+        holder.card.setVignetteFavOnClickListener(view -> {
+            v.setIsFavorite(!v.getIsFavorite());
+            holder.card.setVignetteFavorite(v.getIsFavorite());
+        });
+
         // Tapping a vignette opens its details
         holder.card.setOnClickListener(view -> ((FragmentActivity) view.getContext())
                 .getSupportFragmentManager().beginTransaction()

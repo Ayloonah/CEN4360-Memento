@@ -2,6 +2,7 @@ package com.luanya.memento.ui.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.luanya.memento.R;
+
+import java.util.List;
 
 /* To use, add something like this in your activity's XML:
 
@@ -122,6 +125,22 @@ public class AlbumCard extends ConstraintLayout {
     // Set image4
     public void setAlbumImage4(int drawableId) {
         albumImage4.setImageResource(drawableId);
+    }
+
+    // Set the four tiles from a list of photos, tiles past the end of the list stay empty
+    // If photo == null, the vignette has no picture, so it gets the placeholder
+    public void setAlbumPhotos(List<Bitmap> photos) {
+        ImageView[] tiles = {albumImage1, albumImage2, albumImage3, albumImage4};
+
+        for (int i = 0; i < tiles.length; i++) {
+            if (i >= photos.size()) {
+                tiles[i].setImageResource(0);
+            } else if (photos.get(i) == null) {
+                tiles[i].setImageResource(R.drawable.placeholder_picture);
+            } else {
+                tiles[i].setImageBitmap(photos.get(i));
+            }
+        }
     }
 
     // Attach an OnClickListener to the favorite button

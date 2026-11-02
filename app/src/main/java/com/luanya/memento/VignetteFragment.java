@@ -121,17 +121,23 @@ public class VignetteFragment extends Fragment {
             image.setImageResource(R.drawable.placeholder_picture);
         }
 
-        // date, location and weather
+        // date and location
         date.setText(v.getFormattedDate());
         location.setText(v.getLocation());
-        weather.setText(v.getWeather() + " · " + v.getTemp() + "°F");
+
+        // weather
+        String w = v.getWeather() + " · " + v.getTemp() + "°F";
+        weather.setText(w);
 
         // star
-        if (v.getIsFavorite()) {
-            favorite.setImageResource(R.drawable.icon_favorite_filled);
-        } else {
-            favorite.setImageResource(R.drawable.icon_favorite_empty);
-        }
+        showFavorite(v.getIsFavorite());
+
+        // tapping the star switches it between filled and empty
+        // only a visual change for now, actual implementation will come later
+        favorite.setOnClickListener(view -> {
+            v.setIsFavorite(!v.getIsFavorite());
+            showFavorite(v.getIsFavorite());
+        });
 
         // mood face in the same 1-5 order as the adapter
         switch (v.getMood()) {
@@ -176,5 +182,14 @@ public class VignetteFragment extends Fragment {
         }
 
         return inflatedView;
+    }
+
+    // show the filled or empty star
+    private void showFavorite(boolean isFavorite) {
+        if (isFavorite) {
+            favorite.setImageResource(R.drawable.icon_favorite_filled);
+        } else {
+            favorite.setImageResource(R.drawable.icon_favorite_empty);
+        }
     }
 }

@@ -27,6 +27,7 @@ public class MainPage extends Fragment {
     private TextView empty;
     private RecyclerView rv;
     private ImageButton add;
+    private ImageButton filter;
 
     public MainPage() {
         // Required empty public constructor
@@ -62,6 +63,7 @@ public class MainPage extends Fragment {
         rv = inflatedView.findViewById(R.id.mainPageRecycler);
         rv.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
         add = inflatedView.findViewById(R.id.mainPageAdd);
+        filter = inflatedView.findViewById(R.id.mainPageFilter);
 
         // Update the toolbar
         tb.setToolbarLeftButton(R.drawable.icon_settings);
@@ -83,6 +85,10 @@ public class MainPage extends Fragment {
         // Currently set to read sample data, but later will read actual user data
         List<Vignette> vignettes = ReadSampleData.getVignettesData(inflatedView.getContext());
         rv.setAdapter(new VignetteAdapter(vignettes));
+
+        // Filter button listener
+        filter.setOnClickListener(view ->
+                new Filter().show(getParentFragmentManager(), "filter"));
 
         // Add button menu and listener
         add.setOnClickListener(view -> {
