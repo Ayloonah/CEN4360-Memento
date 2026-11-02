@@ -38,7 +38,7 @@
             <!-- title (required) -->
 
             <TextView
-                android:id="@+id/TextView_Privacy&Tracking"
+                android:id="@+id/TextView_PrivacyAndTracking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fields_privacy"
