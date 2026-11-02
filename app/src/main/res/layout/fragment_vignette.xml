@@ -1,7 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- vignette details (mem-67 / design page 7) -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    tools:context=".VignetteFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".VignetteFragment" />
+    android:layout_height="match_parent">
+
+    <!-- shared toolbar (title and menu set in java) -->
+    <com.luanya.memento.ui.components.MementoToolbar
+        android:id="@+id/vignetteDetailToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- everything under the toolbar scrolls -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vignetteDetailToolbar">
+
+        <!-- white card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- photo (picture icon if there isn't one) -->
+            <ImageView
+                android:id="@+id/vignetteDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/card_vignette_image_rounded"
+                android:clipToOutline="true"
+                android:contentDescription="@string/card_vignette"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_picture" />
+
+            <!-- date and star -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vignetteDetailDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/el_messiri"
+                    android:textColor="@color/mem_text_dark"
+                    android:textSize="18sp"
+                    tools:text="September 20, 2026" />
+
+                <ImageView
+                    android:id="@+id/vignetteDetailFavorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/card_favorite"
+                    android:src="@drawable/icon_favorite_empty" />
+            </LinearLayout>
+
+            <!-- location -->
+            <TextView
+                android:id="@+id/vignetteDetailLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/el_messiri"
+                android:textColor="@color/mem_text_dark"
+                android:textSize="18sp"
+                tools:text="Lake Eola Park" />
+
+            <!-- weather and mood -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vignetteDetailWeather"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/el_messiri"
+                    android:textColor="@color/mem_text_dark"
+                    android:textSize="18sp"
+                    tools:text="Partly Cloudy · 82°F" />
+
+                <ImageView
+                    android:id="@+id/vignetteDetailMood"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:contentDescription="@string/card_mood"
+                    android:visibility="invisible"
+                    tools:src="@drawable/mood_happy"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <!-- divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/mem_border_pale" />
+
+            <!-- journal -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/vignette_journal"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <TextView
+                android:id="@+id/vignetteDetailJournal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/el_messiri"
+                android:lineSpacingExtra="6dp"
+                android:textColor="@color/mem_text_pale"
+                android:textSize="16sp"
+                tools:text="Walked around Lake Eola this afternoon." />
+
+            <!-- albums -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/vignette_albums"
+                android:textAppearance="@style/Memento.VignetteCardTitle" />
+
+            <TextView
+                android:id="@+id/vignetteDetailAlbums"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/el_messiri"
+                android:textColor="@color/mem_text_pale"
+                android:textSize="16sp"
+                tools:text="Little Adventures" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

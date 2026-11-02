@@ -3,6 +3,7 @@ package com.luanya.memento;
 import android.view.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentActivity;
 
 import com.luanya.memento.ui.components.VignetteCard;
 
@@ -72,7 +73,14 @@ public class VignetteAdapter extends RecyclerView.Adapter<VignetteAdapter.Vignet
             default:
                 holder.card.setVignetteMood(0);
                 break;
+
         }
+
+        // Tapping a vignette opens its details
+        holder.card.setOnClickListener(view -> ((FragmentActivity) view.getContext())
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, VignetteFragment.newInstance(v.getId()), null)
+                .addToBackStack(null).commit());
     }
 
     @Override
